@@ -36,7 +36,7 @@ def main():
 
         query = st.text_input("Ask questions here")
 
-        embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-large")
+        embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-large", model_kwargs={"device": "cuda"})
 
         db = Chroma(
             persist_directory=PERSIST_DIRECTORY,
@@ -48,7 +48,7 @@ def main():
 
         model_id = "TheBloke/WizardLM-7B-uncensored-GPTQ"
         model_basename = "WizardLM-7B-uncensored-GPTQ-4bit-128g.compat.no-act-order.safetensors"
-        llm = load_model(model_id=model_id, model_basename=model_basename)
+        llm = load_model(device_type="cuda", model_id=model_id, model_basename=model_basename)
 
         qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, return_source_documents=True)
 

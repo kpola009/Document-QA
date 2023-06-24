@@ -10,7 +10,7 @@ from transformers import (AutoModelForCausalLM,
                           LlamaTokenizer,
                           pipeline)
 
-def load_model(model_id, model_basename=None):
+def load_model(device_type, model_id, model_basename=None):
 
     if model_basename is not None:
 
@@ -29,7 +29,7 @@ def load_model(model_id, model_basename=None):
             quantize_config=None,
         )
 
-    elif():
+    elif(device_type.lower() == "cuda"):
         
         tokenizer = AutoTokenizer.from_pretrained(model_id)
 

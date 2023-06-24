@@ -35,7 +35,7 @@ def create_knowledge(chunks):
             model_name = "hkunlp/instructor-large"
 
             #TODO: Decide on using device type
-            #, model_kwargs={"device": device_type}
+            , model_kwargs={"device": "cuda"}
         )
 
     db = Chroma.from_documents(chunks,
